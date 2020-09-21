@@ -1,18 +1,18 @@
 # from PIL import Image, ImageFont, ImageDraw
 import pandas as pd
 import numpy
-import smtplib 
-from email.mime.multipart import MIMEMultipart 
-from email.mime.text import MIMEText 
-from email.mime.base import MIMEBase 
-from email import encoders 
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.mime.base import MIMEBase
+from email import encoders
 
 def sendMail(first_name, name,email):
-    fromaddr = "sdisilva13@gmail.com"      #change
+    fromaddr = "sdisilva13@gmail.com"
     toaddr = email
-    msg = MIMEMultipart()  
-    msg['From'] = fromaddr 
-    msg['To'] = toaddr  
+    msg = MIMEMultipart()
+    msg['From'] = fromaddr
+    msg['To'] = toaddr
     msg['Subject'] = "Certificate of Participation"
     body = f"""\
     <html>
@@ -38,13 +38,13 @@ def sendMail(first_name, name,email):
     """
 
     # for certificate
-    certificate = open(f"D:/Shubham/shubham/Cert_&_emails_python/workshop1/{name}.png", "rb")  #change
+    certificate = open(f"C:/Users/Shubham/Downloads/OpenCV Certificates.zip/Certificates/{name}.png", "rb")  #change
     msg.attach(MIMEText(body, 'html'))
     filename = f"{name}.png"
-    p = MIMEBase('application', 'octet-stream') 
+    p = MIMEBase('application', 'octet-stream')
     p.set_payload((certificate).read())
-    encoders.encode_base64(p) 
-    p.add_header('Content-Disposition', "attachment; filename= %s" % filename) 
+    encoders.encode_base64(p)
+    p.add_header('Content-Disposition', "attachment; filename= %s" % filename)
     msg.attach(p)
 
     #for zipfile
@@ -57,11 +57,11 @@ def sendMail(first_name, name,email):
     msg.attach(p1)
 
     s = smtplib.SMTP('smtp.gmail.com', 587)
-    s.starttls() 
-    s.login(fromaddr, "saviosavio")                                      #change
-    text = msg.as_string() 
-    s.sendmail(fromaddr, toaddr, text) 
-    s.quit() 
+    s.starttls()
+    s.login(fromaddr, "saviosavio")
+    text = msg.as_string()
+    s.sendmail(fromaddr, toaddr, text)
+    s.quit()
 
 
 
