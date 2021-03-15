@@ -38,7 +38,7 @@ def sendMail(first_name, name,email):
     """
 
     # for certificate
-    certificate = open(f"C:/Users/Shubham/Downloads/OpenCV Certificates.zip/Certificates/{name}.png", "rb")  #change
+    certificate = open(f"D:/Shubham/shubham/Cert_&_emails_python/workshop_cert/Certificates/{name}.png", "rb")  #change
     msg.attach(MIMEText(body, 'html'))
     filename = f"{name}.png"
     p = MIMEBase('application', 'octet-stream')
@@ -70,4 +70,5 @@ for i in range(len(df)):
     name = df.iloc[i,0]
     email = df.iloc[i,1]
     first_name = name.split()[0]
-    sendMail(first_name ,name, email)
+    sendMail(first_name, name, email)
+    print(f"Sent {name}")
